@@ -1,0 +1,22 @@
+numpy==1.23
+scipy==1.9.3
+numba==0.56.4
+librosa==0.8.1
+scikit-learn==1.0.2
+matplotlib==3.5.1
+PyQt5==5.15.6
+inflect==5.3.0
+sounddevice==0.4.3
+SoundFile==0.10.3.post1
+tqdm==4.62.3
+umap-learn==0.5.2
+streamlit
+pydub
+resampy
+
+# PyTorch is required but must be installed separately according to your system and CUDA version.
+# Please follow instructions at https://pytorch.org/get-started/locally/
+# Example for CPU-only Windows:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+torch
+unidecode

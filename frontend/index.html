@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Real-Time Voice Cloning Web</title>
+</head>
+<body>
+    <h1>Real-Time Voice Cloning</h1>
+    <form id="synthesis-form">
+        <label for="reference_audio">Reference Audio (wav, mp3, etc.):</label><br />
+        <input type="file" id="reference_audio" name="reference_audio" accept="audio/*" required /><br /><br />
+        <label for="text">Text to Synthesize:</label><br />
+        <textarea id="text" name="text" rows="4" cols="50" required></textarea><br /><br />
+        <button type="submit">Synthesize</button>
+    </form>
+    <h2>Output Audio</h2>
+    <audio id="output_audio" controls></audio>
+
+    <script>
+        const form = document.getElementById('synthesis-form');
+        const outputAudio = document.getElementById('output_audio');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('/synthesize', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    alert('Error: ' + (error.error || 'Unknown error'));
+                    return;
+                }
+
+                // Instead of parsing JSON, treat response as blob (audio)
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                outputAudio.src = url;
+                outputAudio.play();
+            } catch (err) {
+                alert('Error: ' + err.message);
+            }
+        });
+    </script>
+</body>
+</html>
