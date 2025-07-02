@@ -14,7 +14,7 @@ from utils.default_models import ensure_default_models
 
 # Load models on startup
 MODEL_DIR = Path("saved_models/default")
-ensure_default_models(MODEL_DIR.parent)
+#ensure_default_models(MODEL_DIR.parent)
 
 encoder.load_model(MODEL_DIR / "encoder.pt")
 synthesizer = Synthesizer(MODEL_DIR / "synthesizer.pt")
